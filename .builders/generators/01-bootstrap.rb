@@ -27,7 +27,7 @@ KManager.action :bootstrap do
         # run_command('git init')
       end
       .blueprint(
-        active: true,
+        active: false,
         name: :bin_hook,
         description: 'initialize repository',
         on_exist: :write) do
@@ -60,14 +60,20 @@ KManager.action :bootstrap do
         # run_command("git add .; git commit -m 'chore: #{self.options.description.downcase}'; git push")
       end
       .blueprint(
-        active: false,
+        active: true,
+        template_base_folder: 'html/design-system',
         name: :opinionated,
-        description: 'opinionated files',
+        description: 'opinionated files for a HTML design system',
         on_exist: :write) do
 
         cd(:app)
 
-        # add('something.txt', dom: dom)
+        debug
+
+        add('index.css', dom: dom)
+        add('index.html', dom: dom)
+        add('index.pack.js', dom: dom)
+        add('readme.md', dom: dom)
 
         # run_command("git add .; git commit -m 'chore: #{self.options.description.downcase}'; git push")
       end
